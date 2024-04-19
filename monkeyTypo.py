@@ -59,6 +59,7 @@ def monkey_type(stdscr):
         time_elapsed = max(time.time() - start_time, 1)
         wpm = round((len(curr_text) / (time_elapsed / 60)) / 5)
         stdscr.addstr(2, 0, f"WPM: {wpm}")
+        # because of nodelay we have to surround getKey with try, or it will throw exception
         try:
             curr_char = stdscr.getkey()
         except:
