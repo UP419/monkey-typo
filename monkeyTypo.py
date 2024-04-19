@@ -64,6 +64,7 @@ def monkey_type(stdscr):
             continue
         if ord(curr_char) == 27:
             break
+            # backspaces on different platforms
         if curr_char in ("KEY_BACKSOACE", '\b', "\x7f"):
             if len(curr_text) > 0:
                 curr_text.pop()
