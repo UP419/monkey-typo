@@ -32,9 +32,10 @@ def init_text(stdscr):
     return text
 
 
-def process(stdscr, text, curr_text):
+def process(stdscr, text, curr_text, wpm):
     stdscr.clear()
     stdscr.addstr(text, curses.color_pair(3))
+    stdscr.addstr(2, 0, f"WPM: {wpm}")
     for i in range(len(curr_text)):
         color = curses.color_pair(2)
         char = curr_text[i]
@@ -70,7 +71,7 @@ def monkey_type(stdscr):
                 curr_text.pop()
         else:
             curr_text.append(curr_char)
-        process(stdscr, text, curr_text)
+        process(stdscr, text, curr_text, wpm)
         if "".join(curr_text) == text:
             stdscr.nodelay(False)
             break
@@ -81,7 +82,7 @@ def main(stdscr):
     display_welcome_text(stdscr)
     while True:
         monkey_type(stdscr)
-        stdscr.addstr(3, 0, "Great job! You completed the text! Press any key to continue (Esc to terminate)",
+        stdscr.addstr(4, 0, "Great job! You completed the text! Press any key to continue (Esc to terminate)",
                       curses.color_pair(3))
         key = stdscr.getkey()
         if ord(key) == 27:
